@@ -235,14 +235,16 @@ jobs:
           # plain `sha256sum -c` from whatever directory the user downloaded
           # into, without a path from this runner leaking into it.
           rm -f SHA256SUMS SHA256SUMS.asc
-          # Written to a temporary name and moved into place: a redirect creates
-          # the target before `find` reads the directory, so writing straight to
-          # SHA256SUMS puts a line for itself in the file, hashed while empty, and
-          # every `sha256sum -c` then reports one failure.
+          # Written outside this directory and moved into place: a redirect
+          # creates its target before `find` runs, so a list written here, under
+          # any name, contains a line for itself, hashed while empty, and every
+          # `sha256sum -c` then reports one failure.
+          SUMS_TMP="$(mktemp)"
           find . -maxdepth 1 -type f ! -name 'SHA256SUMS*' -printf '%P\n' \
-            | sort | xargs --no-run-if-empty sha256sum > sums.tmp
-          test -s sums.tmp   # an empty release is a failed release
-          mv sums.tmp SHA256SUMS
+            | sort | xargs --no-run-if-empty sha256sum > "$SUMS_TMP"
+          test -s "$SUMS_TMP"   # an empty release is a failed release
+          mv "$SUMS_TMP" SHA256SUMS
+          chmod 644 SHA256SUMS
           cat SHA256SUMS
 
           if [ -z "${APT_GPG_PRIVATE_KEY:-}" ]; then
