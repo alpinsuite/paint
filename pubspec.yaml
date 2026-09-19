@@ -1,0 +1,55 @@
+name: paint
+description: "A simple, easy-to-use image editor for Linux."
+publish_to: "none"
+
+# Single source of truth for the application version.
+# `tools/set_version.sh` propagates this value to the Debian control file,
+# the AppStream metainfo and the About dialog. See docs/RELEASING.md.
+version: 0.2.0+4
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # The widget kit everything is drawn with. Pinned to a tag: a branch ref
+  # would re-resolve on any `pub get` and change the whole interface.
+  slate_ui:
+    git:
+      url: https://github.com/alpinsuite/ui-kit.git
+      ref: v0.2.0
+
+  # Multi-format image decoding/encoding (PNG, JPEG, BMP, GIF, TIFF, TGA, ICO...).
+  image: ^4.9.1
+  # Native GTK open/save dialogs.
+  file_selector: ^1.1.0
+  # Drag-and-drop of files onto the window.
+  desktop_drop: ^0.7.1
+  # Image clipboard. Deliberately chosen over super_clipboard, which needs a
+  # Rust toolchain in CI; pasteboard ships a plain C++/GTK plugin.
+  pasteboard: ^0.5.0
+  # Window title, minimum size and close interception.
+  window_manager: ^0.5.2
+  # State wiring (ChangeNotifier).
+  provider: ^6.1.5
+  # Settings and recent files persistence.
+  shared_preferences: ^2.5.5
+
+  intl: any
+  path: ^1.9.0
+  collection: ^1.19.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - assets/icon/paint.png

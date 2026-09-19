@@ -1,0 +1,356 @@
+{
+  "@@locale": "en",
+  "appTitle": "Paint",
+  "@appTitle": {
+    "description": "Application name shown in the window title and About dialog"
+  },
+  "windowTitle": "{document} - Paint",
+  "@windowTitle": {
+    "description": "Window title with the current document name",
+    "placeholders": {
+      "document": {
+        "type": "String",
+        "example": "drawing.png"
+      }
+    }
+  },
+  "untitledDocument": "Untitled",
+  "modifiedMarker": "*{name}",
+  "@modifiedMarker": {
+    "description": "Prefix marking a document with unsaved changes",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "drawing.png"
+      }
+    }
+  },
+  "menuFile": "File",
+  "menuEdit": "Edit",
+  "menuView": "View",
+  "menuImage": "Image",
+  "menuHelp": "Help",
+  "actionNew": "New",
+  "actionOpen": "Open...",
+  "actionSave": "Save",
+  "actionSaveAs": "Save As...",
+  "actionRecentFiles": "Recent Files",
+  "actionNoRecentFiles": "No recent files",
+  "actionClearRecentFiles": "Clear list",
+  "actionQuit": "Quit",
+  "actionUndo": "Undo",
+  "actionRedo": "Redo",
+  "actionCut": "Cut",
+  "actionCopy": "Copy",
+  "actionPaste": "Paste",
+  "actionPasteFrom": "Paste From...",
+  "actionCopyTo": "Copy To...",
+  "actionDelete": "Delete",
+  "actionSelectAll": "Select All",
+  "actionDeselect": "Deselect",
+  "actionInvertSelection": "Invert Selection",
+  "actionCropToSelection": "Crop to Selection",
+  "actionZoomIn": "Zoom In",
+  "actionZoomOut": "Zoom Out",
+  "actionZoomNormal": "Actual Size",
+  "actionZoomFit": "Fit to Window",
+  "actionToggleTheme": "Appearance",
+  "actionPreferences": "Preferences...",
+  "actionAbout": "About Paint",
+  "imageFlipHorizontal": "Flip Horizontal",
+  "imageFlipVertical": "Flip Vertical",
+  "imageRotate90Right": "Rotate 90° Right",
+  "imageRotate90Left": "Rotate 90° Left",
+  "imageRotate180": "Rotate 180°",
+  "imageResize": "Resize Image...",
+  "imageCanvasSize": "Canvas Size...",
+  "imageStretchSkew": "Stretch and Skew...",
+  "imageInvertColors": "Invert Colors",
+  "imageClear": "Clear Image",
+  "imageDrawOpaque": "Draw Opaque",
+  "toolPencil": "Pencil",
+  "toolBrush": "Brush",
+  "toolEraser": "Eraser",
+  "toolFill": "Fill with Color",
+  "toolEyedropper": "Pick Color",
+  "toolText": "Text",
+  "toolLine": "Line",
+  "toolCurve": "Curve",
+  "toolRectangle": "Rectangle",
+  "toolRoundedRectangle": "Rounded Rectangle",
+  "toolEllipse": "Ellipse",
+  "toolPolygon": "Polygon",
+  "toolSelectRectangle": "Rectangular Selection",
+  "toolSelectFreeform": "Free-Form Selection",
+  "optionSize": "Size",
+  "optionTip": "Tip",
+  "optionTipRound": "Round",
+  "optionTipSquare": "Square",
+  "optionTipSlash": "Slash",
+  "optionTipBackslash": "Backslash",
+  "optionFillStyle": "Fill style",
+  "optionFillOutline": "Outline",
+  "optionFillSolid": "Fill",
+  "optionFillBoth": "Outline and fill",
+  "optionTolerance": "Tolerance",
+  "optionContiguous": "Contiguous",
+  "optionAntiAlias": "Smooth edges",
+  "optionCornerRadius": "Corner radius",
+  "optionSelectionTransparent": "Transparent selection",
+  "optionEraseToSecondary": "Erase to secondary color",
+  "optionFontFamily": "Font",
+  "optionFontSize": "Font size",
+  "optionBold": "Bold",
+  "optionItalic": "Italic",
+  "optionUnderline": "Underline",
+  "optionAlignLeft": "Align left",
+  "optionAlignCenter": "Align center",
+  "optionAlignRight": "Align right",
+  "optionOpaqueBackground": "Opaque background",
+  "colorPrimary": "Primary color",
+  "colorSecondary": "Secondary color",
+  "colorSwapHint": "Swap primary and secondary colors",
+  "colorEdit": "Edit Colors...",
+  "colorRecent": "Recent colors",
+  "colorDialogTitle": "Edit Colors",
+  "colorHue": "Hue",
+  "colorSaturation": "Saturation",
+  "colorValue": "Value",
+  "colorRed": "Red",
+  "colorGreen": "Green",
+  "colorBlue": "Blue",
+  "colorAlpha": "Alpha",
+  "colorHex": "Hex",
+  "colorInvalidHex": "Enter a color like #3366FF",
+  "windowMinimize": "Minimize",
+  "windowMaximize": "Maximize",
+  "windowRestore": "Restore",
+  "windowClose": "Close",
+  "themeSystem": "Follow system",
+  "themeLight": "Light",
+  "themeDark": "Dark",
+  "newImageTitle": "New Image",
+  "resizeImageTitle": "Resize Image",
+  "canvasSizeTitle": "Canvas Size",
+  "stretchSkewTitle": "Stretch and Skew",
+  "fieldWidth": "Width",
+  "fieldHeight": "Height",
+  "fieldUnitPixels": "Pixels",
+  "fieldUnitPercent": "Percentage",
+  "fieldMaintainAspectRatio": "Maintain aspect ratio",
+  "fieldAnchor": "Anchor",
+  "fieldBackground": "Background",
+  "backgroundWhite": "White",
+  "backgroundTransparent": "Transparent",
+  "backgroundSecondaryColor": "Secondary color",
+  "sectionStretch": "Stretch",
+  "sectionSkew": "Skew",
+  "fieldHorizontal": "Horizontal",
+  "fieldVertical": "Vertical",
+  "unitDegrees": "Degrees",
+  "buttonOk": "OK",
+  "buttonCancel": "Cancel",
+  "buttonSave": "Save",
+  "buttonDiscard": "Discard",
+  "buttonClose": "Close",
+  "buttonReset": "Reset",
+  "unsavedTitle": "Save changes?",
+  "unsavedMessage": "“{document}” has unsaved changes. Your changes will be lost if you don't save them.",
+  "@unsavedMessage": {
+    "placeholders": {
+      "document": {
+        "type": "String",
+        "example": "drawing.png"
+      }
+    }
+  },
+  "statusPosition": "{x}, {y} px",
+  "@statusPosition": {
+    "description": "Cursor position in image coordinates",
+    "placeholders": {
+      "x": {
+        "type": "int",
+        "example": "120"
+      },
+      "y": {
+        "type": "int",
+        "example": "80"
+      }
+    }
+  },
+  "statusSize": "{width} × {height} px",
+  "@statusSize": {
+    "description": "Image or selection size",
+    "placeholders": {
+      "width": {
+        "type": "int",
+        "example": "1920"
+      },
+      "height": {
+        "type": "int",
+        "example": "1080"
+      }
+    }
+  },
+  "statusSelection": "Selection: {width} × {height} px",
+  "@statusSelection": {
+    "placeholders": {
+      "width": {
+        "type": "int",
+        "example": "100"
+      },
+      "height": {
+        "type": "int",
+        "example": "50"
+      }
+    }
+  },
+  "statusZoom": "{percent}%",
+  "@statusZoom": {
+    "placeholders": {
+      "percent": {
+        "type": "int",
+        "example": "100"
+      }
+    }
+  },
+  "actionCopyToClipboard": "Copy",
+  "copiedToClipboard": "Copied",
+  "copyImageTooltip": "Copy the whole image to the clipboard, ready to paste elsewhere  (Ctrl+C)",
+  "copySelectionTooltip": "Copy the selection to the clipboard, ready to paste elsewhere  (Ctrl+C)",
+  "dropHint": "Drop an image to open it",
+  "dropHintPaste": "Hold Shift while dropping to paste into the current image",
+  "fileTypeImages": "Images",
+  "fileTypeAllFiles": "All files",
+  "saveFormatLabel": "Format",
+  "jpegQuality": "JPEG quality",
+  "errorOpenFailed": "Could not open “{file}”.",
+  "@errorOpenFailed": {
+    "placeholders": {
+      "file": {
+        "type": "String",
+        "example": "photo.png"
+      }
+    }
+  },
+  "errorSaveFailed": "Could not save “{file}”.",
+  "@errorSaveFailed": {
+    "placeholders": {
+      "file": {
+        "type": "String",
+        "example": "photo.png"
+      }
+    }
+  },
+  "errorUnsupportedFormat": "“{extension}” images cannot be opened.",
+  "@errorUnsupportedFormat": {
+    "placeholders": {
+      "extension": {
+        "type": "String",
+        "example": ".xcf"
+      }
+    }
+  },
+  "errorUnsupportedSaveFormat": "“{extension}” images cannot be saved. Choose another format.",
+  "@errorUnsupportedSaveFormat": {
+    "placeholders": {
+      "extension": {
+        "type": "String",
+        "example": ".webp"
+      }
+    }
+  },
+  "errorClipboardEmpty": "The clipboard does not contain an image.",
+  "errorClipboardWriteFailed": "Could not put the image on the clipboard.",
+  "errorImageTooLarge": "The image is too large. The maximum size is {max} × {max} pixels.",
+  "@errorImageTooLarge": {
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "example": "20000"
+      }
+    }
+  },
+  "warningAlphaLoss": "This format does not support transparency. Transparent areas will be filled with white.",
+  "warningLossy": "This format is lossy. Image quality will be reduced each time you save.",
+  "aboutDescription": "A simple, easy-to-use image editor for Linux.",
+  "aboutVersion": "Version {version}",
+  "@aboutVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String",
+        "example": "0.1.0"
+      }
+    }
+  },
+  "keyCtrl": "Ctrl",
+  "@keyCtrl": {
+    "description": "Control modifier key, shown in menu shortcut labels"
+  },
+  "keyShift": "Shift",
+  "@keyShift": {
+    "description": "Shift modifier key, shown in menu shortcut labels"
+  },
+  "keyAlt": "Alt",
+  "@keyAlt": {
+    "description": "Alt modifier key, shown in menu shortcut labels"
+  },
+  "keyDelete": "Del",
+  "@keyDelete": {
+    "description": "Delete key, shown in menu shortcut labels"
+  },
+  "unitPixels": "px",
+  "@unitPixels": {
+    "description": "Abbreviation for pixels, shown after a numeric value"
+  },
+  "unitPoints": "pt",
+  "@unitPoints": {
+    "description": "Abbreviation for typographic points, shown after a font size"
+  },
+  "aboutLicense": "Released under the GNU General Public License, version 3 or later.",
+  "@aboutLicense": {
+    "description": "Licence line in the About dialog"
+  },
+  "actionCheckUpdatesNow": "Check for Updates Now",
+  "@actionCheckUpdatesNow": {
+    "description": "Help menu command that checks the repository immediately"
+  },
+  "actionAutoCheckUpdates": "Check for Updates Automatically",
+  "@actionAutoCheckUpdates": {
+    "description": "Help menu toggle enabling a once-a-day update check"
+  },
+  "updateAvailable": "{version} available",
+  "@updateAvailable": {
+    "description": "Status bar notice that a newer version has been published",
+    "placeholders": {
+      "version": {
+        "type": "String",
+        "example": "0.2.0"
+      }
+    }
+  },
+  "updateUpToDate": "Paint is up to date.",
+  "@updateUpToDate": {
+    "description": "Shown when an explicit update check finds nothing newer"
+  },
+  "updateCheckFailed": "Could not reach the update repository.",
+  "@updateCheckFailed": {
+    "description": "Shown when an explicit update check could not complete"
+  },
+  "updateChecking": "Checking for updates...",
+  "@updateChecking": {
+    "description": "Shown while an explicit update check is running"
+  },
+  "updateUpgradeHint": "Copy the upgrade command",
+  "@updateUpgradeHint": {
+    "description": "Tooltip on the status bar update notice"
+  },
+  "updateCommandCopied": "Command copied",
+  "@updateCommandCopied": {
+    "description": "Confirmation after copying the apt upgrade command"
+  },
+  "updateDismiss": "Dismiss",
+  "@updateDismiss": {
+    "description": "Button that hides the update notice"
+  }
+}

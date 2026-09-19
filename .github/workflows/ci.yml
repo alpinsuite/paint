@@ -1,0 +1,197 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+# A new push to the same branch makes the in-flight run irrelevant.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FLUTTER_VERSION: "3.44.8"
+
+jobs:
+  analyze:
+    name: Analyze and test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Install Linux desktop build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev
+
+      - run: flutter pub get
+
+      - name: Check formatting
+        run: dart format --set-exit-if-changed .
+
+      - name: Analyze
+        run: flutter analyze --fatal-infos
+
+      - name: Check the generated localizations are up to date
+        # Regenerating must be a no-op; a stale generated file means someone
+        # edited the ARB without running gen-l10n.
+        run: |
+          flutter gen-l10n
+          if ! git diff --quiet -- lib/l10n/generated; then
+            echo "::error::lib/l10n/generated is stale — run 'flutter gen-l10n'"
+            git --no-pager diff -- lib/l10n/generated
+            exit 1
+          fi
+
+      - name: Check for hardcoded user-facing strings
+        # Every string the user can read has to come from AppLocalizations, or
+        # translating the app later means auditing the whole UI by hand.
+        run: bash tools/check_hardcoded_strings.sh
+
+      - name: Test
+        run: flutter test --coverage
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage
+          path: coverage/lcov.info
+          if-no-files-found: ignore
+
+  build:
+    name: Build and package
+    runs-on: ubuntu-latest
+    # Release binaries are built against glibc 2.35 so they run on Ubuntu
+    # 22.04+ and Debian 12+. Building on the runner's own 24.04 would hard-
+    # require glibc 2.39 and exclude every one of those.
+    # Pinned by digest, not by tag. `ubuntu:22.04` floats: the image behind it
+    # is rebuilt, and in a year nobody can reconstruct the environment this
+    # release was built in. A digest is the only form of "same container" that
+    # survives time, and every reproducibility claim depends on it.
+    #
+    # To move it, resolve the tag and paste the manifest-list digest:
+    #   curl -fsSL https://hub.docker.com/v2/repositories/library/ubuntu/tags/22.04 | jq -r .digest
+    container: ubuntu@sha256:2edbbc5dc405e9612ba3584ce95480277e3eb374407b5505fe26f17df77c7dbc   # 22.04
+    steps:
+      - name: Install toolchain
+        # jq is needed by subosito/flutter-action's setup script and is not in
+        # the base image; without it the action fails before Flutter is fetched.
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            ca-certificates curl git jq unzip xz-utils zip \
+            clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev \
+            dpkg-dev apt-utils file desktop-file-utils lintian
+
+      - uses: actions/checkout@v4
+
+      - name: Trust the container's git directories
+        # The job runs as root while the checkout and the Flutter SDK are owned
+        # by other uids, and git refuses to touch either without this. The
+        # wildcard covers the SDK, which flutter-action installs later, and the
+        # pub cache; the container is ephemeral, so its scope costs nothing.
+        run: git config --global --add safe.directory '*'
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - run: flutter pub get
+
+      - name: Build release bundle
+        run: flutter build linux --release
+
+      - name: Build the Debian package
+        run: bash packaging/build_deb.sh
+
+      - name: Validate the package
+        run: |
+          desktop-file-validate packaging/deb/io.github.rbuache.Paint.desktop
+          # Lintian findings are informational here: several of its policy
+          # checks do not apply to a self-contained bundled application.
+          lintian --no-tag-display-limit build/dist/*.deb || true
+          # sed rather than head: head closes the pipe early, which makes
+          # dpkg-deb report a broken pipe and litter the log with an error
+          # for a step that actually succeeded.
+          dpkg-deb --contents build/dist/*.deb | sed -n '1,40p'
+
+      - name: Smoke-test the install
+        run: |
+          apt-get install -y ./build/dist/*.deb
+
+          # Runtime files are checked on disk: a missing path here is a broken
+          # install.
+          for path in \
+            /usr/bin/paint \
+            /usr/lib/paint/paint \
+            /usr/lib/paint/data/icudtl.dat \
+            /usr/share/applications/io.github.rbuache.Paint.desktop \
+            /usr/share/icons/hicolor/256x256/apps/io.github.rbuache.Paint.png \
+            /usr/share/metainfo/io.github.rbuache.Paint.metainfo.xml
+          do
+            if [ -e "$path" ]; then
+              echo "  installed  $path"
+            else
+              echo "  MISSING    $path"
+              exit 1
+            fi
+          done
+          test -x /usr/bin/paint
+
+          # Documentation is checked inside the package instead of on disk.
+          # Container base images ship /etc/dpkg/dpkg.cfg.d/excludes, which
+          # drops /usr/share/man and most of /usr/share/doc during extraction,
+          # so a filesystem check would test the image's policy rather than
+          # whether the package ships the files.
+          dpkg-deb --contents build/dist/*.deb > /tmp/contents.txt
+          for path in \
+            ./usr/share/man/man1/paint.1.gz \
+            ./usr/share/doc/paint/copyright \
+            ./usr/share/doc/paint/changelog.gz
+          do
+            if grep -q " $path$" /tmp/contents.txt; then
+              echo "  packaged   $path"
+            else
+              echo "  MISSING    $path (not in the .deb)"
+              exit 1
+            fi
+          done
+
+      - name: Package the portable tarball
+        run: |
+          VERSION="$(bash tools/set_version.sh)"
+          mkdir -p build/dist
+          tar -czf "build/dist/paint-${VERSION}-linux-x64.tar.gz" \
+            -C build/linux/x64/release/bundle .
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Software Bill of Materials
+        # CycloneDX, resolved from pubspec.lock and written in the same job
+        # that produced the .deb, so it describes this build rather than
+        # somebody's laptop. --check is the gate: it fails on a missing,
+        # stale, or incomplete SBOM.
+        env:
+          SBOM_OUT: build/dist/sbom.cdx.json
+        run: |
+          bash tools/sbom.sh
+          bash tools/sbom.sh --check
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux-packages
+          path: build/dist/*
+          if-no-files-found: error

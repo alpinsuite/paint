@@ -1,0 +1,56 @@
+.TH PAINT 1 "2026-08-06" "paint" "User Commands"
+.SH NAME
+paint \- a simple, easy-to-use image editor
+.SH SYNOPSIS
+.B paint
+.RI [ FILE ]
+.SH DESCRIPTION
+.B paint
+is a raster image editor for the Linux desktop, in the spirit of the classic
+Windows accessory. It offers pencil, brush, eraser, fill, shape and text tools,
+rectangular and free-form selection, the usual flip, rotate, resize, canvas
+size and skew operations, deep undo, drag-and-drop and clipboard support.
+.PP
+If
+.I FILE
+is given and names an image the editor can read, it is opened on start-up.
+Otherwise a blank canvas is created at the size last used.
+.SH FORMATS
+Reads and writes PNG, JPEG, BMP, GIF, TIFF, TGA and ICO.
+Reads WebP, Photoshop (flattened) and Netpbm.
+.SH KEYBOARD
+.TP
+.B Ctrl+N, Ctrl+O, Ctrl+S, Ctrl+Shift+S
+New, Open, Save, Save As
+.TP
+.B Ctrl+Z, Ctrl+Y
+Undo, Redo
+.TP
+.B Ctrl+X, Ctrl+C, Ctrl+V
+Cut, Copy, Paste
+.TP
+.B Ctrl+A, Ctrl+Shift+A
+Select All, Deselect
+.TP
+.B Ctrl+plus, Ctrl+minus, Ctrl+0, Ctrl+9
+Zoom in, Zoom out, Actual size, Fit to window
+.TP
+.B Ctrl+scroll
+Zoom around the pointer
+.TP
+.B Escape
+Cancel the current gesture, or drop the selection
+.PP
+Single letters select tools: P pencil, B brush, E eraser, F fill, K colour
+picker, T text, L line, C curve, R rectangle, D rounded rectangle, O ellipse,
+G polygon, S rectangular selection, A free-form selection.
+.SH FILES
+.TP
+.I ~/.local/share/io.github.rbuache.paint/shared_preferences.json
+Theme choice, recent files, default canvas size and custom colours. Removing
+this file resets the application to its defaults. It is not owned by the
+package, so uninstalling leaves it in place.
+.SH BUGS
+Report issues at https://github.com/rbuache/paint/issues
+.SH LICENSE
+MIT.

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.rbuache.Paint</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+
+  <name>Paint</name>
+  <summary>A simple, easy-to-use image editor</summary>
+
+  <description>
+    <p>
+      Paint is a straightforward raster image editor for the Linux desktop, in
+      the spirit of the classic Windows accessory: open a picture, draw on it,
+      save it, and get on with your day.
+    </p>
+    <p>Tools and commands:</p>
+    <ul>
+      <li>Pencil, brush with selectable tips, eraser and fill bucket</li>
+      <li>Line, curve, rectangle, rounded rectangle, ellipse and polygon</li>
+      <li>Text with font, size, weight, slant and alignment</li>
+      <li>Rectangular and free-form selection, with move, resize and crop</li>
+      <li>Flip, rotate, resize, canvas size, stretch and skew, invert colours</li>
+      <li>Deep undo and redo, bounded by a memory budget rather than a step count</li>
+      <li>Open and save PNG, JPEG, BMP, GIF, TIFF, TGA and ICO; open WebP, PSD and Netpbm</li>
+      <li>Drag and drop files onto the window, and copy or paste images through the system clipboard</li>
+      <li>A restrained light and dark theme that follows the desktop</li>
+    </ul>
+  </description>
+
+  <launchable type="desktop-id">io.github.rbuache.Paint.desktop</launchable>
+
+  <url type="homepage">https://github.com/rbuache/paint</url>
+  <url type="bugtracker">https://github.com/rbuache/paint/issues</url>
+
+  <provides>
+    <binary>paint</binary>
+  </provides>
+
+  <categories>
+    <category>Graphics</category>
+    <category>2DGraphics</category>
+    <category>RasterGraphics</category>
+  </categories>
+
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+  </supports>
+
+  <requires>
+    <display_length compare="ge">720</display_length>
+  </requires>
+
+  <content_rating type="oars-1.1"/>
+
+  <releases>
+    <release version="0.2.0" date="2026-08-07">
+      <description>
+        <p>See the changelog for what changed in 0.2.0.</p>
+      </description>
+    </release>
+    <release version="0.1.0" date="2026-08-07">
+      <description>
+        <p>First release.</p>
+      </description>
+    </release>
+  </releases>
+</component>

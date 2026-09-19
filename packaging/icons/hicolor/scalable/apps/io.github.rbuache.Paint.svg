@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <title>Paint</title>
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4B5A70"/>
+      <stop offset="1" stop-color="#2B3341"/>
+    </linearGradient>
+    <linearGradient id="swash" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#E4574C"/>
+      <stop offset="0.45" stop-color="#F0A93B"/>
+      <stop offset="1" stop-color="#4A9BE0"/>
+    </linearGradient>
+    <linearGradient id="handle" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.55" stop-color="#F1F4F8"/>
+      <stop offset="1" stop-color="#C4CCD8"/>
+    </linearGradient>
+    <linearGradient id="ferrule" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#D2D8E2"/>
+      <stop offset="0.5" stop-color="#828C9D"/>
+      <stop offset="1" stop-color="#AEB7C4"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="512" height="512" rx="112" fill="url(#tile)"/>
+
+  <!-- Whole composition, scaled up about the tile centre so it fills the
+       square rather than hugging one corner. -->
+  <g transform="translate(256 256) scale(1.12) translate(-256 -256)">
+
+    <!-- The painted stroke. Drawn first so the brush sits on top of it, which
+         reads as the brush having just laid it down. -->
+    <path d="M 140 348 C 222 424 314 424 404 336"
+          fill="none" stroke="url(#swash)" stroke-width="58" stroke-linecap="round"/>
+
+    <!-- Brush, built pointing straight up from its tip at the origin, then
+         placed tip-first at the start of the stroke. -->
+    <g transform="translate(140 348) rotate(35)">
+      <!-- Dark backing gives the light handle an edge against the tile, which
+           is what keeps it readable once the icon is 16px tall. -->
+      <rect x="-33" y="-300" width="66" height="242" rx="33" fill="#1E2530" opacity="0.45"/>
+      <rect x="-28" y="-296" width="56" height="184" rx="28" fill="url(#handle)"/>
+      <rect x="-36" y="-128" width="72" height="62" rx="11" fill="url(#ferrule)"/>
+      <rect x="-36" y="-106" width="72" height="7" fill="#5E6878" opacity="0.6"/>
+      <path d="M -33 -70 L 33 -70 L 24 -20 Q 0 16 -24 -20 Z" fill="#F5B44A"/>
+      <path d="M -33 -70 L 0 -70 L 0 -2 Q -13 -10 -24 -20 Z" fill="#D98A22" opacity="0.45"/>
+    </g>
+  </g>
+</svg>
