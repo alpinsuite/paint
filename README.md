@@ -44,7 +44,7 @@ sudo curl -fsSL -o /etc/apt/sources.list.d/buache-systems.sources \
 sudo apt update && sudo apt install paint
 ```
 
-Or grab a single file from [Releases](https://github.com/rbuache/paint/releases):
+Or grab a single file from [Releases](https://github.com/alpinsuite/paint/releases):
 
 ```bash
 sudo apt install ./paint_0.2.0_amd64.deb   # Debian package
@@ -180,5 +180,5 @@ You may use, study, modify and redistribute it. If you distribute it, modified
 or not, you have to pass on the source and the same freedoms. Running it, and
 changing it for your own use, carries no obligation at all.
 
-Releases up to and including 0.2.0 were published under the MIT License and
-remain available under it.
+Release 0.1.0 was published under the MIT License and remains available under
+it.

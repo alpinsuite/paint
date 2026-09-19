@@ -96,7 +96,7 @@ Priority: optional
 Architecture: $ARCH
 Maintainer: $MAINTAINER
 Installed-Size: $INSTALLED_SIZE
-Homepage: https://github.com/rbuache/paint
+Homepage: https://github.com/alpinsuite/paint
 Description: simple, easy-to-use image editor
  Paint is a straightforward raster image editor for the Linux desktop, in the
  spirit of the classic Windows accessory: open a picture, draw on it, save it,

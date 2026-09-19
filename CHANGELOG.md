@@ -7,22 +7,7 @@ and the project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-### Changed
-
-- **Relicensed to GPL-3.0-or-later.** Anyone may still use, study, modify and
-  redistribute Paint. What changes is that a redistributed copy, modified or
-  not, has to carry its source and the same freedoms with it, so nobody can
-  build a closed product on this one. Running it, and changing it for your own
-  use, carry no obligation at all. Releases up to and including 0.2.0 were
-  published under the MIT License and stay available under it; this applies
-  from the next release onward.
-
-- The widget kit the interface is drawn with now comes from the `slate_ui`
-  package ([alpinsuite/ui-kit](https://github.com/alpinsuite/ui-kit)) instead of
-  a copy in `lib/slate/`. Nothing about the interface changes; the code that
-  draws it simply lives somewhere else, pinned to a tag.
-
-## [0.2.0] - 2026-08-07
+## [0.2.0] - 2026-09-19
 
 ### Added
 
@@ -42,6 +27,22 @@ and the project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   than implying everything is current.
 
 ### Changed
+
+- **Relicensed to GPL-3.0-or-later.** Anyone may still use, study, modify and
+  redistribute Paint. What changes is that a redistributed copy, modified or
+  not, has to carry its source and the same freedoms with it, so nobody can
+  build a closed product on this one. Running it, and changing it for your own
+  use, carry no obligation at all. Release 0.1.0 was published under the MIT
+  License and stays available under it; this applies from 0.2.0 onward.
+
+- The widget kit the interface is drawn with now comes from the `slate_ui`
+  package ([alpinsuite/ui-kit](https://github.com/alpinsuite/ui-kit)) instead of
+  a copy in `lib/slate/`. Nothing about the interface changes; the code that
+  draws it simply lives somewhere else, pinned to a tag.
+
+- Paint is installed from the one signed APT repository that serves every
+  Buache Systems application, at `apt.buache.systems`, rather than from a
+  repository of its own. The optional update check asks the same address.
 
 - The published download page leads with what the program is — icon, name, a
   download button naming the exact package and its size, and a screenshot that
@@ -106,6 +107,6 @@ First release: a complete, usable editor with parity against classic MS Paint.
   alongside it so the version, the link and the size always match the package
   that was just released.
 
-[Unreleased]: https://github.com/rbuache/paint/compare/v0.2.0...HEAD
-[0.2.0]: https://github.com/rbuache/paint/compare/v0.1.0...v0.2.0
-[0.1.0]: https://github.com/rbuache/paint/releases/tag/v0.1.0
+[Unreleased]: https://github.com/alpinsuite/paint/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/alpinsuite/paint/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/alpinsuite/paint/releases/tag/v0.1.0
