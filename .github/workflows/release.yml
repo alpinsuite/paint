@@ -148,10 +148,10 @@ jobs:
             echo ""
             echo '```bash'
             echo "sudo install -d -m 0755 /etc/apt/keyrings"
-            echo "curl -fsSL https://rbuache.github.io/paint/paint-archive-keyring.gpg \\"
-            echo "  | sudo tee /etc/apt/keyrings/paint.gpg > /dev/null"
-            echo "sudo curl -fsSL -o /etc/apt/sources.list.d/paint.sources \\"
-            echo "  https://rbuache.github.io/paint/paint.sources"
+            echo "curl -fsSL https://apt.buache.systems/buache-systems-archive-keyring.gpg \\"
+            echo "  | sudo tee /etc/apt/keyrings/buache-systems.gpg > /dev/null"
+            echo "sudo curl -fsSL -o /etc/apt/sources.list.d/buache-systems.sources \\"
+            echo "  https://apt.buache.systems/buache-systems.sources"
             echo "sudo apt update && sudo apt install paint"
             echo '```'
             echo ""
@@ -273,37 +273,6 @@ jobs:
           draft: false
           prerelease: ${{ contains(needs.build.outputs.version, '-') }}
 
-      - name: Install apt-utils
-        run: sudo apt-get update && sudo apt-get install -y apt-utils
-
-      - name: Check out the published site
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          # gh-pages may not exist yet on the first release.
-          if git ls-remote --exit-code --heads origin gh-pages > /dev/null 2>&1; then
-            git fetch origin gh-pages
-            git worktree add pages origin/gh-pages
-          else
-            git worktree add --detach pages
-            cd pages
-            git checkout --orphan gh-pages
-            git rm -rf . > /dev/null 2>&1 || true
-          fi
-
-      - name: Regenerate the APT repository
-        env:
-          APT_GPG_PRIVATE_KEY: ${{ secrets.APT_GPG_PRIVATE_KEY }}
-          APT_GPG_PASSPHRASE: ${{ secrets.APT_GPG_PASSPHRASE }}
-        run: bash packaging/publish_apt.sh "$PWD/pages" dist/*.deb
-
-      - name: Publish the site
-        run: |
-          cd pages
-          git add -A
-          if git diff --cached --quiet; then
-            echo "nothing changed"
-            exit 0
-          fi
-          git commit -m "Publish paint ${{ needs.build.outputs.version }}"
-          git push origin HEAD:gh-pages
+      # The APT repository is not published from here. alpinsuite/apt rebuilds
+      # itself from this Releases page within the hour and signs the result
+      # there. To publish now: gh workflow run publish.yml -R alpinsuite/apt

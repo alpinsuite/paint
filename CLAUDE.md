@@ -40,7 +40,6 @@ flutter build linux --release          # → build/linux/x64/release/bundle/pain
 
 bash packaging/build_deb.sh            # → build/dist/paint_<version>_amd64.deb
 bash packaging/build_appimage.sh
-bash packaging/publish_apt.sh /tmp/repo build/dist/*.deb
 tools/set_version.sh                   # print version; pass one to set it
 ```
 

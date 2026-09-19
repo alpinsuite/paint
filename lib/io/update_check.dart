@@ -18,7 +18,7 @@ import 'dart:io';
 
 /// The published package index for the stable suite.
 const String kPackagesIndexUrl =
-    'https://rbuache.github.io/paint/dists/stable/main/binary-amd64/Packages';
+    'https://apt.buache.systems/dists/stable/main/binary-amd64/Packages';
 
 /// The package the index is searched for.
 const String kPackageName = 'paint';
