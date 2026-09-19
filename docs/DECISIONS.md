@@ -168,7 +168,8 @@ pub cache — around a gigabyte — would have to be vendored into the source
 tarball, and a separate build maintained per Ubuntu series.
 
 **Cost.** Users add a keyring and a sources file by hand rather than running
-`add-apt-repository`. The published `paint.sources` file makes that two commands.
+`add-apt-repository`. The published `buache-systems.sources` file makes that two commands, once
+for every application in the suite.
 
 **Alternatives kept open.** Snap (Snapcraft has an official Flutter extension and
 is the easiest *store* route), Flatpak (best cross-distro reach, but the SDK must

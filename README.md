@@ -37,10 +37,10 @@ From the APT repository, so `apt upgrade` keeps it current:
 
 ```bash
 sudo install -d -m 0755 /etc/apt/keyrings
-curl -fsSL https://rbuache.github.io/paint/paint-archive-keyring.gpg \
-  | sudo tee /etc/apt/keyrings/paint.gpg > /dev/null
-sudo curl -fsSL -o /etc/apt/sources.list.d/paint.sources \
-  https://rbuache.github.io/paint/paint.sources
+curl -fsSL https://apt.buache.systems/buache-systems-archive-keyring.gpg \
+  | sudo tee /etc/apt/keyrings/buache-systems.gpg > /dev/null
+sudo curl -fsSL -o /etc/apt/sources.list.d/buache-systems.sources \
+  https://apt.buache.systems/buache-systems.sources
 sudo apt update && sudo apt install paint
 ```
 

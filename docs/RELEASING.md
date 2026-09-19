@@ -57,8 +57,9 @@ CI checks that a tag matches.
    `CHANGELOG.md` section plus the install instructions, and attaches every
    artifact. A version containing a hyphen (`0.2.0-rc.1`) is marked a
    prerelease automatically.
-5. Regenerates the **APT repository** on `gh-pages` and pushes it, so
-   `apt upgrade` picks up the new version.
+5. Stops there. The suite's **APT repository**, `alpinsuite/apt`, picks the
+   release up within the hour, so `apt upgrade` offers the new version. Run
+   `gh workflow run publish.yml -R alpinsuite/apt` to publish it at once.
 
 The AppImage step is `continue-on-error`: a failed `appimagetool` download must
 not hold back the `.deb`, which is the primary artifact.
